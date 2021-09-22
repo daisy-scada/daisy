@@ -1,0 +1,65 @@
+{
+	"name": "test",
+	"projects": [
+		{
+			"name": "project_name",
+			"dss": [
+				{
+					"name": "get_ds_name",
+					"protocol": {
+						"name": "modbus-tcp",
+						"connection": {
+							"address": "https://localhost:502",
+							"properties": "slave"
+						}
+					}
+				},
+				{
+					"name": "send_ds_name",
+					"protocol": {
+						"name": "modbus-tcp",
+						"connection": {
+							"address": "https://192.168.37.01:502",
+							"properties": "master"
+						}
+					}
+				}
+			],
+			"dev": [
+				{
+					"name": "dev_devices",
+					"dss": [
+						{
+							"ref": "get_ds_name",
+							"points": [
+								{
+									"name": "get_dp_auto",
+									"address": {
+										"register": "Coil",
+										"desc": "Coil, Discrete Input, Input Register, Holding Register",
+										"address": "01",
+										"codesys_address": "%MX0.001",
+										"bit": "7",
+										"address1": "4071"
+									}
+								}
+							]
+						},
+						{
+							"ref": "set_ds_name",
+							"points": [
+								{
+									"name": "set_db_auto",
+									"address": {
+										"register": "Coil",
+										"address": "01"
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
